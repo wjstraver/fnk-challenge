@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Office;
 use App\Models\Order;
+use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -16,24 +17,24 @@ class OrderImport implements WithHeadingRow, ToModel, WithValidation, SkipsOnFai
 {
     use SkipsFailures;
 
-    public array $customerIdMap = [];
-    public array $officeIdMap = [];
-    public array $employeeIdMap = [];
+    protected array $customerIdMap = [];
+    protected array $officeIdMap = [];
+    protected array $employeeIdMap = [];
 
     public function model(array $row): Order
     {
-        [$office, $employee] = explode(' / ', $row['Vestiging / verkoper']);
+        [$office, $employee] = explode(' / ', $row['vestiging_verkoper']);
 
         $order = new Order(
             [
-                'product' => $row['Product'],
-                'customer_id' => $this->getCustomerId($row['Koper']),
+                'product' => $row['product'],
+                'customer_id' => $this->getCustomerId($row['koper']),
                 'office_id' => $this->getOfficeId($office),
                 'employee_id' => $this->getEmployeeId($employee),
             ]
         );
-        $order->id = $row['ID'] ?? null;
-        $order->created_at = $row['Datum / tijd'];
+        $order->id = $row['id'] ?? null;
+        $order->created_at = Carbon::createFromFormat('d/m/Y H:i', $row['datum_tijd']);
 
         return $order;
     }
@@ -44,7 +45,7 @@ class OrderImport implements WithHeadingRow, ToModel, WithValidation, SkipsOnFai
             return $this->customerIdMap[$customerName];
         }
 
-        $nameArray = explode($customerName, ' ');
+        $nameArray = explode(' ', $customerName);
         $initials = array_shift($nameArray);
 
         $customer = Customer::query()->firstOrCreate(
@@ -95,12 +96,6 @@ class OrderImport implements WithHeadingRow, ToModel, WithValidation, SkipsOnFai
 
     public function rules(): array
     {
-        return [
-            'ID' => ['integer', 'required'],
-            'Koper' => ['string', 'required'],
-            'Datum / tijd' => ['required', 'date_format:d/m/Y H:i'],
-            'Product' => ['string', 'required'],
-            'Vestiging / verkoper' => ['string', 'required'],
-        ];
+        return config('order-import.rules', []);
     }
 }

@@ -15,3 +15,15 @@ use App\Http\Controllers\Controller;
 */
 
 Route::get('', [Controller::class, 'index'])->name('index');
+
+Route::get('test', function() {
+    $path = config('order-import.default_file');
+
+    \Maatwebsite\Excel\Facades\Excel::import(new \App\Imports\OrderImport(), $path);
+    dd('what do i get here?', [
+        \App\Models\Office::count(),
+        \App\Models\Employee::count(),
+        \App\Models\Customer::count(),
+        \App\Models\Order::count()
+    ]);
+});
