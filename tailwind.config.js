@@ -8,32 +8,19 @@ module.exports = {
 			},
 			black: {
 				DEFAULT: '#000000',
-				900: '#000000',
-				800: '#262626',
-				300: '#B2B2B2',
+				900: '#2c2c2c',
 			},
-			red: {
-				DEFAULT: '#EA1B0A',
-				100: '#F7E8DA',
-				200: '#F6C1B0',
-				900: '#b91508',
+			blue: {
+				DEFAULT: '#24a1da',
 			},
-			turquoise: {
-				DEFAULT: '#1EA2B1',
-				100: '#E1EDED',
-				200: '#B0DADE',
+			orange: {
+				DEFAULT: '#da5d24',
 			},
-			yellow: '#E3E000',
-			test: 'rgba(255, 20, 20, .5)',
 			transparent: 'transparent',
 		},
 		extend: {
-			fontFamily: {
-				eon: ['eon', 'system-ui', 'sans-serif'],
-			},
-			screens: {
-				mobile: { raw: '(max-aspect-ratio: 5/4)' },
-				mini: { raw: '(max-height: 330px)' },
+			boxShadow: {
+				heading: '0 0 10px rgba(0,0,0,.6)',
 			},
 		},
 	},
