@@ -16,7 +16,7 @@ This application is build using the following tools and frameworks:
 - PostCSS
 - Tailwind
 
-## Installation.
+## Installation
 
 This project has been set up with Laravel Sail. If you have Docker installed on your machine, you can install this
 application using the following command in the root directory of this project:
