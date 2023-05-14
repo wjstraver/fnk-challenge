@@ -16,25 +16,25 @@ use App\Http\Controllers\Controller;
 
 Route::get('', [Controller::class, 'index'])->name('index');
 
-Route::get('orders', function() {
-    $orders = \App\Models\Order::with('employee', 'office', 'customer')->get();
-
-    return \App\Http\Resources\OrderResource::collection($orders);
-});
-
-Route::get('employees', function() {
-    $employees = \App\Models\Employee::withCount('orders')->get();
-
-    return \App\Http\Resources\EmployeeResource::collection($employees);
-});
-
-
-Route::get('products', function() {
-    // $products = Order select raw distinct and count
-    $o = \App\Models\Order::query()
-        ->selectRaw('product, COUNT(*) as sale_count')
-        ->groupBy('product')
-        ->get();
-
-    dd($o->toArray());
-});
+//Route::get('orders', function() {
+//    $orders = \App\Models\Order::with('employee', 'office', 'customer')->get();
+//
+//    return \App\Http\Resources\OrderResource::collection($orders);
+//});
+//
+//Route::get('employees', function() {
+//    $employees = \App\Models\Employee::withCount('orders')->get();
+//
+//    return \App\Http\Resources\EmployeeResource::collection($employees);
+//});
+//
+//
+//Route::get('products', function() {
+//    // $products = Order select raw distinct and count
+//    $o = \App\Models\Order::query()
+//        ->selectRaw('product, COUNT(*) as sale_count')
+//        ->groupBy('product')
+//        ->get();
+//
+//    dd($o->toArray());
+//});
