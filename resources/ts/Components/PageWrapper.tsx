@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import Header from '@/Components/Header';
+import Header from '@/Components/Page/Header';
 import MaxWidthContainer from '@/Components/Page/MaxWidthContainer';
 
 type PageProps = {
@@ -11,8 +11,10 @@ const PageWrapper: React.FC<PropsWithChildren<PageProps>> = ({ activeHeader, tit
 	<>
 		<Header active={activeHeader} />
 		<MaxWidthContainer className="mt-8">
-			<h1>{title}</h1>
-			{children}
+			<main>
+				<h1>{title}</h1>
+				{children}
+			</main>
 		</MaxWidthContainer>
 	</>
 );

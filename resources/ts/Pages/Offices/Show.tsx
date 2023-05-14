@@ -2,7 +2,8 @@ import React from 'react';
 import { Page } from '@inertiajs/inertia';
 import { Office, Order } from '@/types';
 import { usePage } from '@inertiajs/inertia-react';
-import Header from '@/Components/Header';
+import ItemDetails from '@/Components/ItemDetails';
+import PageWrapper from '@/Components/PageWrapper';
 
 type OfficeShowPage = Page<{
 	office: Office;
@@ -15,10 +16,9 @@ const Show: React.FC = () => {
 	} = usePage<OfficeShowPage>();
 
 	return (
-		<>
-			<Header active="offices" />
-			<h1>{office.name}</h1>
-		</>
+		<PageWrapper activeHeader="offices" title={`Office: ${office.name}`}>
+			<ItemDetails item={office} keys={{ id: 'ID', name: 'Name' }} />
+		</PageWrapper>
 	);
 };
 

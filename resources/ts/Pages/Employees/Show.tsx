@@ -1,24 +1,24 @@
 import React from 'react';
 import { Page } from '@inertiajs/inertia';
-import { Office, Order } from '@/types';
+import { Employee, Order } from '@/types';
 import { usePage } from '@inertiajs/inertia-react';
-import Header from '@/Components/Header';
+import ItemDetails from '@/Components/ItemDetails';
+import PageWrapper from '@/Components/PageWrapper';
 
-type OfficeShowPage = Page<{
-	office: Office;
+type EmployeeShowPage = Page<{
+	employee: Employee;
 	orders: Order[];
 }>;
 
 const Show: React.FC = () => {
 	const {
-		props: { office },
-	} = usePage<OfficeShowPage>();
+		props: { employee },
+	} = usePage<EmployeeShowPage>();
 
 	return (
-		<>
-			<Header active="employees" />
-			<h1>{office.name}</h1>
-		</>
+		<PageWrapper activeHeader="employees" title={`Employee: ${employee.name}`}>
+			<ItemDetails item={employee} keys={{ id: 'ID', name: 'Name' }} />
+		</PageWrapper>
 	);
 };
 

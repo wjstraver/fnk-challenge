@@ -1,11 +1,11 @@
 import React from 'react';
 import { Page } from '@inertiajs/inertia';
-import { Product, Order } from '@/types';
+import { Order } from '@/types';
 import { usePage } from '@inertiajs/inertia-react';
-import Header from '@/Components/Header';
+import PageWrapper from '@/Components/PageWrapper';
 
 type ProductShowPage = Page<{
-	product: Product;
+	product: string;
 	orders: Order[];
 }>;
 
@@ -13,12 +13,10 @@ const Show: React.FC = () => {
 	const {
 		props: { product },
 	} = usePage<ProductShowPage>();
-
 	return (
-		<>
-			<Header active="products" />
-			<h1>{product.product}</h1>
-		</>
+		<PageWrapper activeHeader="products" title={`Product: ${product}`}>
+			<p>table of orders</p>
+		</PageWrapper>
 	);
 };
 
