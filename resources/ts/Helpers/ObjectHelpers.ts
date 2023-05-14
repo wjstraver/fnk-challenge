@@ -2,7 +2,7 @@ import { Customer, Employee, Office, Order, Product, SortableItem } from '@/type
 
 type ConvertableItem = {
 	[key: string]: any;
-	ID?: number;
+	id?: number;
 };
 
 type ConvertableMapping = {
@@ -16,7 +16,7 @@ export function convertToSortableItems(items: ConvertableItem[], mapping: Conver
 				...result,
 				[label]: item[key] ?? null,
 			}),
-			{ ID: item.id },
+			{ id: item.id },
 		),
 	);
 }
@@ -28,7 +28,7 @@ export function customersToSortable(customers: Customer[]): { items: SortableIte
 			Lastname: 'lastname',
 			Orders: 'orderCount',
 		}),
-		keys: ['ID', 'Initials', 'Lastname', 'Orders'],
+		keys: ['id', 'Initials', 'Lastname', 'Orders'],
 	};
 }
 
@@ -38,7 +38,7 @@ export function employeesToSortable(employees: Employee[]): { items: SortableIte
 			Name: 'name',
 			'Sold Orders': 'orderCount',
 		}),
-		keys: ['ID', 'Name', 'Sold Orders'],
+		keys: ['id', 'Name', 'Sold Orders'],
 	};
 }
 
@@ -48,7 +48,7 @@ export function officesToSortable(offices: Office[]): { items: SortableItem[]; k
 			Name: 'name',
 			'Sold Orders': 'orderCount',
 		}),
-		keys: ['ID', 'Name', 'Sold Orders'],
+		keys: ['id', 'Name', 'Sold Orders'],
 	};
 }
 
@@ -58,14 +58,14 @@ export function ordersToSortable(orders: Order[]): { items: SortableItem[]; keys
 			Product: 'product',
 			'Created At': 'createdAt',
 		}),
-		keys: ['ID', 'Product', 'Created At'],
+		keys: ['id', 'Product', 'Created At'],
 	};
 }
 
 export function productsToSortable(products: Product[]): { items: SortableItem[]; keys: string[] } {
 	return {
 		items: convertToSortableItems(products, {
-			ID: 'product',
+			id: 'product',
 			Product: 'product',
 			'Sale Count': 'saleCount',
 		}),
