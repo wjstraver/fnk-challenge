@@ -13,9 +13,9 @@ class OrderResource extends JsonResource
             'id' => $this->id,
             'product' => $this->product,
             'createdAt' => $this->created_at,
-            'office' => $this->whenLoaded('office', fn() => OfficeResource::make($this->office)),
             'customer' => $this->whenLoaded('customer', fn() => CustomerResource::make($this->customer)),
             'employee' => $this->whenLoaded('employee', fn() => EmployeeResource::make($this->employee)),
+            'office' => $this->whenLoaded('office', fn() => OfficeResource::make($this->office)),
         ];
     }
 }
