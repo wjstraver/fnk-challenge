@@ -1,6 +1,6 @@
 import React from 'react';
-import MaxWidthContainer from '@/Components/General/MaxWidthContainer';
-import Fonky from '@/Components/General/Fonky';
+import MaxWidthContainer from '@/Components/Page/MaxWidthContainer';
+import Fonky from '@/Components/Page/Fonky';
 import { InertiaLink } from '@inertiajs/inertia-react';
 import { mc } from '@/Helpers/StringHelpers';
 
@@ -26,7 +26,7 @@ const headingRoutes = [
 		key: 'orders',
 	},
 	{
-		label: 'Customers',
+		label: 'Products',
 		href: '/products',
 		key: 'products',
 	},
@@ -38,9 +38,9 @@ const HeadingLink: React.FC<{ href: string; label: string; active: boolean }> = 
 	</li>
 );
 
-const Heading: React.FC<{ active?: string }> = ({ active }) => {
+const Header: React.FC<{ active?: string }> = ({ active }) => {
 	return (
-		<header className="w-full bg-white z-10 shadow-heading text-blue">
+		<header className="w-full bg-white z-10 shadow-heading text-blue sticky top-0">
 			<MaxWidthContainer>
 				<nav className="py-6 flex">
 					<InertiaLink href="/" className="relative">
@@ -57,4 +57,4 @@ const Heading: React.FC<{ active?: string }> = ({ active }) => {
 	);
 };
 
-export default Heading;
+export default Header;

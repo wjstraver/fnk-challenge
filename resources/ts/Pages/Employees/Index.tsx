@@ -2,7 +2,7 @@ import React from 'react';
 import { Page } from '@inertiajs/inertia';
 import { Employee } from '@/types';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
-import Heading from '@/Components/Heading';
+import PageWrapper from '@/Components/PageWrapper';
 
 type EmployeesIndexPage = Page<{
 	employees: Employee[];
@@ -14,8 +14,7 @@ const Index: React.FC = () => {
 	} = usePage<EmployeesIndexPage>();
 
 	return (
-		<>
-			<Heading active="employees" />
+		<PageWrapper activeHeader="employees" title="Employees">
 			<ul>
 				{employees.map((employee) => (
 					<li key={employee.id}>
@@ -23,7 +22,7 @@ const Index: React.FC = () => {
 					</li>
 				))}
 			</ul>
-		</>
+		</PageWrapper>
 	);
 };
 

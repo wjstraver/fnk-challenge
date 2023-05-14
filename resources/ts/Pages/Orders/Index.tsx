@@ -2,7 +2,7 @@ import React from 'react';
 import { Page } from '@inertiajs/inertia';
 import { Order } from '@/types';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
-import Heading from '@/Components/Heading';
+import PageWrapper from '@/Components/PageWrapper';
 
 type OrdersIndexPage = Page<{
 	orders: Order[];
@@ -14,8 +14,7 @@ const Index: React.FC = () => {
 	} = usePage<OrdersIndexPage>();
 
 	return (
-		<>
-			<Heading active="orders" />
+		<PageWrapper activeHeader="orders" title="Orders">
 			<ul>
 				{orders.map((order) => (
 					<li key={order.id}>
@@ -23,7 +22,7 @@ const Index: React.FC = () => {
 					</li>
 				))}
 			</ul>
-		</>
+		</PageWrapper>
 	);
 };
 

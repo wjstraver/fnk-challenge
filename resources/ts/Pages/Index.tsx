@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Heading from '@/Components/Heading';
+import Header from '@/Components/Header';
 
 const Index: React.FC = () => {
 	return (
 		<>
-			<Heading />
+			<Header />
 			<p>something else</p>
 		</>
 	);
