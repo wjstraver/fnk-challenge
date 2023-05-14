@@ -2,27 +2,27 @@
 
 namespace Tests\Feature\Controllers;
 
-use App\Models\Customer;
+use App\Models\Employee;
 use App\Models\Order;
 use Illuminate\Support\Collection;
 use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
-class CustomerControllerTest extends TestCase
+class EmployeeControllerTest extends TestCase
 {
-    protected Collection $customers;
+    protected Collection $employees;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->customers = Customer::factory()->count(2)->create();
+        $this->employees = Employee::factory()->count(2)->create();
 
         Order::factory()
             ->times(4)
             ->sequence(
-                ['customer_id' => $this->customers->first()->id],
-                ['customer_id' => $this->customers->last()->id],
+                ['employee_id' => $this->employees->first()->id],
+                ['employee_id' => $this->employees->last()->id],
             )
             ->create();
     }
@@ -30,17 +30,15 @@ class CustomerControllerTest extends TestCase
     /** @test */
     public function it_returns_200_on_index(): void
     {
-        $this->get(route('customers.index'))
+        $this->get(route('employees.index'))
             ->assertInertia(function (Assert $page) {
-                $page->component('Customers/Index')
+                $page->component('Employees/Index')
                     ->has(
-                        'customers',
+                        'employees',
                         2,
-                        fn(Assert $customer) => $customer->has('orderCount')
+                        fn(Assert $employee) => $employee->has('orderCount')
                             ->has('name')
-                            ->has('initials')
                             ->has('id')
-                            ->has('lastname')
                     );
             });
     }
@@ -49,10 +47,10 @@ class CustomerControllerTest extends TestCase
     public function it_returns_200_on_show(): void
     {
         $this->get(
-            route('customers.show', ['customer' => $this->customers->first()->id])
+            route('employees.show', ['employee' => $this->employees->first()->id])
         )->assertInertia(function (Assert $page) {
-            $page->component('Customers/Show')
-                ->has('customer')
+            $page->component('Employees/Show')
+                ->has('employee')
                 ->has('orders', 2);
         });
     }

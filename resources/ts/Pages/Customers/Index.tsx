@@ -3,14 +3,14 @@ import { Page } from '@inertiajs/inertia';
 import { Customer } from '@/types';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 
-type CustomerIndexPage = Page<{
+type CustomersIndexPage = Page<{
 	customers: Customer[];
 }>;
 
 const Index: React.FC = () => {
 	const {
 		props: { customers },
-	} = usePage<CustomerIndexPage>();
+	} = usePage<CustomersIndexPage>();
 
 	return (
 		<div>

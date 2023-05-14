@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\OfficeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,25 +26,22 @@ Route::prefix('customers')->as('customers.')->group(function () {
     Route::get('{customer}', [CustomerController::class, 'show'])->name('show');
 });
 
-//Route::get('orders', function() {
-//    $orders = \App\Models\Order::with('employee', 'office', 'customer')->get();
-//
-//    return \App\Http\Resources\OrderResource::collection($orders);
-//});
-//
-//Route::get('employees', function() {
-//    $employees = \App\Models\Employee::withCount('orders')->get();
-//
-//    return \App\Http\Resources\EmployeeResource::collection($employees);
-//});
-//
-//
-//Route::get('products', function() {
-//    // $products = Order select raw distinct and count
-//    $o = \App\Models\Order::query()
-//        ->selectRaw('product, COUNT(*) as sale_count')
-//        ->groupBy('product')
-//        ->get();
-//
-//    dd($o->toArray());
-//});
+Route::prefix('employees')->as('employees.')->group(function () {
+    Route::get('', [EmployeeController::class, 'index'])->name('index');
+    Route::get('{employee}', [EmployeeController::class, 'show'])->name('show');
+});
+
+Route::prefix('offices')->as('offices.')->group(function () {
+    Route::get('', [OfficeController::class, 'index'])->name('index');
+    Route::get('{office}', [OfficeController::class, 'show'])->name('show');
+});
+
+Route::prefix('orders')->as('orders.')->group(function () {
+    Route::get('', [OrderController::class, 'index'])->name('index');
+    Route::get('{order}', [OrderController::class, 'show'])->name('show');
+});
+
+Route::prefix('products')->as('products.')->group(function () {
+    Route::get('', [ProductController::class, 'index'])->name('index');
+    Route::get('{product}', [ProductController::class, 'show'])->name('show');
+});

@@ -29,3 +29,8 @@ export type Order = {
 	employee?: Employee;
 	office?: Office;
 };
+
+export type Product = {
+	product: string;
+	saleCount: number;
+};

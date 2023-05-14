@@ -1,21 +1,21 @@
 import React from 'react';
 import { Page } from '@inertiajs/inertia';
-import { Customer, Order } from '@/types';
+import { Office, Order } from '@/types';
 import { usePage } from '@inertiajs/inertia-react';
 
-type CustomerShowPage = Page<{
-	customer: Customer;
+type OfficeShowPage = Page<{
+	office: Office;
 	orders: Order[];
 }>;
 
 const Show: React.FC = () => {
 	const {
-		props: { customer },
-	} = usePage<CustomerShowPage>();
+		props: { office },
+	} = usePage<OfficeShowPage>();
 
 	return (
 		<div>
-			<h1>{customer.name}</h1>
+			<h1>{office.name}</h1>
 		</div>
 	);
 };

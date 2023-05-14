@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CustomerResource;
+use App\Http\Resources\OrderResource;
 use App\Models\Customer;
 use Inertia\Response;
 
@@ -22,11 +23,11 @@ class CustomerController extends Controller
     public function show(Customer $customer): Response
     {
         return inertia('Customers/Show', [
-            'customer' => function() use ($customer) {
-                $customer->loadMissing('orders');
+            'customer' => fn() => CustomerResource::make($customer),
 
-                return CustomerResource::make($customer);
-            }
+            'orders' => fn() => OrderResource::collection(
+                $customer->orders()->with('office', 'employee')->get()
+            )
         ]);
     }
 }
