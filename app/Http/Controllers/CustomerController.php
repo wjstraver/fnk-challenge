@@ -24,7 +24,6 @@ class CustomerController extends Controller
     {
         return inertia('Customers/Show', [
             'customer' => fn() => CustomerResource::make($customer),
-
             'orders' => fn() => OrderResource::collection(
                 $customer->orders()->with('office', 'employee')->get()
             )
