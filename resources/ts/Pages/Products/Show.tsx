@@ -3,6 +3,8 @@ import { Page } from '@inertiajs/inertia';
 import { Order } from '@/types';
 import { usePage } from '@inertiajs/inertia-react';
 import PageWrapper from '@/Components/PageWrapper';
+import { ordersToSortable } from '@/Helpers/ObjectHelpers';
+import SortableTable from '@/Components/SortableTable';
 
 type ProductShowPage = Page<{
 	product: string;
@@ -11,11 +13,14 @@ type ProductShowPage = Page<{
 
 const Show: React.FC = () => {
 	const {
-		props: { product },
+		props: { product, orders },
 	} = usePage<ProductShowPage>();
+
+	const { items, keys } = ordersToSortable(orders);
+
 	return (
 		<PageWrapper activeHeader="products" title={`Product: ${product}`}>
-			<p>table of orders</p>
+			<SortableTable items={items} keys={keys} title="Orders" linkPrefix="/orders/" />
 		</PageWrapper>
 	);
 };

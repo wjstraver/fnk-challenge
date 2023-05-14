@@ -1,8 +1,10 @@
 import React from 'react';
 import { Page } from '@inertiajs/inertia';
 import { Order } from '@/types';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { usePage } from '@inertiajs/inertia-react';
 import PageWrapper from '@/Components/PageWrapper';
+import { ordersToSortable } from '@/Helpers/ObjectHelpers';
+import SortableTable from '@/Components/SortableTable';
 
 type OrdersIndexPage = Page<{
 	orders: Order[];
@@ -13,15 +15,11 @@ const Index: React.FC = () => {
 		props: { orders },
 	} = usePage<OrdersIndexPage>();
 
+	const { items, keys } = ordersToSortable(orders);
+
 	return (
 		<PageWrapper activeHeader="orders" title="Orders">
-			<ul>
-				{orders.map((order) => (
-					<li key={order.id}>
-						<InertiaLink href={`/orders/${order.id}`}>{order.product}</InertiaLink>
-					</li>
-				))}
-			</ul>
+			<SortableTable items={items} keys={keys} linkPrefix="/orders/" />
 		</PageWrapper>
 	);
 };

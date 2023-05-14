@@ -34,3 +34,8 @@ export type Product = {
 	product: string;
 	saleCount: number;
 };
+
+export type SortableItem = {
+	[key: string]: string | number | null;
+	id?: number;
+};
