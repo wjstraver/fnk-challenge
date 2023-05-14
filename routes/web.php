@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,11 @@ use App\Http\Controllers\Controller;
 */
 
 Route::get('', [Controller::class, 'index'])->name('index');
+
+Route::prefix('customers')->as('customers.')->group(function () {
+    Route::get('', [CustomerController::class, 'index'])->name('index');
+    Route::get('{customer}', [CustomerController::class, 'show'])->name('show');
+});
 
 //Route::get('orders', function() {
 //    $orders = \App\Models\Order::with('employee', 'office', 'customer')->get();
