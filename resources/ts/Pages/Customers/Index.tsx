@@ -2,6 +2,7 @@ import React from 'react';
 import { Page } from '@inertiajs/inertia';
 import { Customer } from '@/types';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import Heading from '@/Components/Heading';
 
 type CustomersIndexPage = Page<{
 	customers: Customer[];
@@ -13,7 +14,8 @@ const Index: React.FC = () => {
 	} = usePage<CustomersIndexPage>();
 
 	return (
-		<div>
+		<>
+			<Heading active="customers" />
 			<ul>
 				{customers.map((customer) => (
 					<li key={customer.id}>
@@ -21,7 +23,7 @@ const Index: React.FC = () => {
 					</li>
 				))}
 			</ul>
-		</div>
+		</>
 	);
 };
 

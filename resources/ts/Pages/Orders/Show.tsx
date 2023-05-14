@@ -2,6 +2,7 @@ import React from 'react';
 import { Page } from '@inertiajs/inertia';
 import { Customer, Employee, Office, Order } from '@/types';
 import { usePage } from '@inertiajs/inertia-react';
+import Heading from '@/Components/Heading';
 
 type OrderShowPage = Page<{
 	order: Order;
@@ -16,9 +17,10 @@ const Show: React.FC = () => {
 	} = usePage<OrderShowPage>();
 
 	return (
-		<div>
+		<>
+			<Heading active="orders" />
 			<h1>{order.product}</h1>
-		</div>
+		</>
 	);
 };
 

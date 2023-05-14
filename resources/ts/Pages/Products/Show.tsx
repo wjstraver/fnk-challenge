@@ -2,6 +2,7 @@ import React from 'react';
 import { Page } from '@inertiajs/inertia';
 import { Product, Order } from '@/types';
 import { usePage } from '@inertiajs/inertia-react';
+import Heading from '@/Components/Heading';
 
 type ProductShowPage = Page<{
 	product: Product;
@@ -14,9 +15,10 @@ const Show: React.FC = () => {
 	} = usePage<ProductShowPage>();
 
 	return (
-		<div>
+		<>
+			<Heading active="products" />
 			<h1>{product.product}</h1>
-		</div>
+		</>
 	);
 };
 

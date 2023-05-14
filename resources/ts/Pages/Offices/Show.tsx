@@ -2,6 +2,7 @@ import React from 'react';
 import { Page } from '@inertiajs/inertia';
 import { Office, Order } from '@/types';
 import { usePage } from '@inertiajs/inertia-react';
+import Heading from '@/Components/Heading';
 
 type OfficeShowPage = Page<{
 	office: Office;
@@ -14,9 +15,10 @@ const Show: React.FC = () => {
 	} = usePage<OfficeShowPage>();
 
 	return (
-		<div>
+		<>
+			<Heading active="offices" />
 			<h1>{office.name}</h1>
-		</div>
+		</>
 	);
 };
 
