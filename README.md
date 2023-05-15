@@ -73,6 +73,7 @@ For backend you kan run the tests using `sail test` or `php artisan test` respec
 
 ### TODO
 
+- [ ] Mobile optimisations
 - [ ] Implement pagination
 - [ ] Move Sortable to backend to make it work with pagination
 - [ ] Add language files
