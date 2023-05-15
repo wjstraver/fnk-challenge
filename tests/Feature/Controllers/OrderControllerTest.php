@@ -23,17 +23,20 @@ class OrderControllerTest extends TestCase
     {
         $this->get(route('orders.index'))
             ->assertInertia(function (Assert $page) {
-                $page->component('Orders/Index')
+                $page->component('Items/Index')
                     ->has(
-                        'orders',
+                        'items',
                         2,
-                        fn(Assert $order) => $order->has('id')
-                            ->has('product')
-                            ->has('createdAt')
-                            ->has('office')
-                            ->has('employee')
-                            ->has('customer')
-                    );
+                        fn(Assert $order) => $order->has('link')
+                            ->has('ID')
+                            ->has(__('Product'))
+                            ->has(__('Created At'))
+                            ->has(__('Customer'))
+                            ->has(__('Employee'))
+                            ->has(__('Office'))
+                    )
+                    ->has('title')
+                    ->has('page');
             });
     }
 
@@ -43,11 +46,10 @@ class OrderControllerTest extends TestCase
         $this->get(
             route('orders.show', ['order' => $this->orders->first()->id])
         )->assertInertia(function (Assert $page) {
-            $page->component('Orders/Show')
-                ->has('order')
-                ->has('customer')
-                ->has('employee')
-                ->has('office');
+            $page->component('Items/Show')
+                ->has('item')
+                ->has('title')
+                ->has('page');
         });
     }
 }

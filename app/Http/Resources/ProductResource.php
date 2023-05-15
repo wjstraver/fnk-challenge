@@ -10,8 +10,10 @@ class ProductResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'product' => $this->product,
-            'saleCount' => $this->sale_count ?? 0
+            'link' => route('products.show', ['product' => $this->product]),
+            'ID' => $this->product,
+            __('Product') => $this->product,
+            __('Times Sold') => $this->sale_count ?? 0
         ];
     }
 }

@@ -10,10 +10,8 @@ class EmployeeResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'orderCount' => $this->whenCounted('orders', fn() => $this->orders_count),
-            'orders' => $this->whenLoaded('orders', fn() => OrderResource::collection($this->orders))
+            'ID' =>  $this->id,
+            __('Name') => $this->name
         ];
     }
 }

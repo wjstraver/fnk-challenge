@@ -29,12 +29,14 @@ class ProductControllerTest extends TestCase
     {
         $this->get(route('products.index'))
             ->assertInertia(function (Assert $page) {
-                $page->component('Products/Index')
+                $page->component('Items/Index')
                     ->has(
-                        'products',
+                        'items',
                         2,
-                        fn(Assert $product) => $product->has('product')
-                            ->has('saleCount')
+                        fn(Assert $product) => $product->has('link')
+                            ->has('ID')
+                            ->has(__('Product'))
+                            ->has(__('Times Sold'))
                     );
             });
     }
@@ -45,8 +47,8 @@ class ProductControllerTest extends TestCase
         $this->get(
             route('products.show', ['product' => $this->products->first()->product])
         )->assertInertia(function (Assert $page) {
-            $page->component('Products/Show')
-                ->has('product')
+            $page->component('Items/Show')
+                ->has('item')
                 ->has('orders', 2);
         });
     }

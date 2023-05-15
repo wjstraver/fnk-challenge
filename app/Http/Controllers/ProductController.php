@@ -11,26 +11,32 @@ class ProductController extends Controller
 {
     public function index(): Response
     {
-        return inertia('Products/Index', [
-            'products' => fn() => ProductResource::collection(
+        return inertia('Items/Index', [
+            'items' => fn() => ProductResource::collection(
                 Order::query()
                     ->selectRaw('product, COUNT(*) as sale_count')
                     ->groupBy('product')
                     ->get()
-            )
+            ),
+            'title' => fn() => __('Products'),
+            'page' => fn () => 'products'
         ]);
     }
 
     public function show(string $product): Response
     {
-        return inertia('Products/Show', [
-            'product' => $product,
+        return inertia('Items/Show', [
+            'item' => fn() => [
+                __('Product') => $product
+            ],
             'orders' => fn() => OrderResource::collection(
                 Order::query()
                     ->where('product', $product)
                     ->with('office', 'employee', 'customer')
                     ->get()
-            )
+            ),
+            'title' => fn() => __('Product: ') . $product,
+            'page' => 'products',
         ]);
     }
 }

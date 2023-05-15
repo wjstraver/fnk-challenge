@@ -4,9 +4,6 @@ type DetailProps = {
 	item: {
 		[key: string]: any;
 	};
-	keys: {
-		[key: string]: string;
-	};
 };
 
 const Entry: React.FC<{ label: string; value?: string }> = ({ label, value = '-' }) => (
@@ -16,14 +13,16 @@ const Entry: React.FC<{ label: string; value?: string }> = ({ label, value = '-'
 	</li>
 );
 
-const ItemDetails: React.FC<DetailProps> = ({ item, keys }) => {
+const ItemDetails: React.FC<DetailProps> = ({ item }) => {
 	return (
 		<section className="mt-8 bg-black-900 text-white max-w-full w-96 p-6">
 			<h2 className="text-white">Details</h2>
 			<ul>
-				{Object.entries(keys).map(([key, label]) => (
-					<Entry label={label} key={key} value={item[key]} />
-				))}
+				{Object.entries(item)
+					.filter(([key]) => key !== 'link')
+					.map(([key, value]) => (
+						<Entry label={key} key={key} value={value} />
+					))}
 			</ul>
 		</section>
 	);

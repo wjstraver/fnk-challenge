@@ -37,5 +37,6 @@ export type Product = {
 
 export type SortableItem = {
 	[key: string]: string | number | null;
-	id?: number;
+	ID: number;
+	link?: string;
 };

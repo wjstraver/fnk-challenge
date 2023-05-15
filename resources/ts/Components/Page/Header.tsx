@@ -3,34 +3,7 @@ import MaxWidthContainer from '@/Components/Page/MaxWidthContainer';
 import Fonky from '@/Components/Page/Fonky';
 import { InertiaLink } from '@inertiajs/inertia-react';
 import { mc } from '@/Helpers/StringHelpers';
-
-const headingRoutes = [
-	{
-		label: 'Customers',
-		href: '/customers',
-		key: 'customers',
-	},
-	{
-		label: 'Offices',
-		href: '/offices',
-		key: 'offices',
-	},
-	{
-		label: 'Employees',
-		href: '/employees',
-		key: 'employees',
-	},
-	{
-		label: 'Orders',
-		href: '/orders',
-		key: 'orders',
-	},
-	{
-		label: 'Products',
-		href: '/products',
-		key: 'products',
-	},
-];
+import { routes } from '@/routes';
 
 const HeadingLink: React.FC<{ href: string; label: string; active: boolean }> = ({ href, label, active }) => (
 	<li className={mc('font-bold uppercase hover:text-orange', active && 'text-orange')}>
@@ -47,7 +20,7 @@ const Header: React.FC<{ active?: string }> = ({ active }) => {
 						<Fonky className="w-[180px] max-w-full h-auto hover:text-orange" />
 					</InertiaLink>
 					<ul className="flex items-center flex-1 justify-end gap-6 w-full">
-						{headingRoutes.map(({ key, href, label }) => (
+						{Object.entries(routes).map(([key, { href, label }]) => (
 							<HeadingLink key={key} href={href} label={label} active={key === active} />
 						))}
 					</ul>
