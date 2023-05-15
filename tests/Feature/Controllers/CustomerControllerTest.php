@@ -32,16 +32,18 @@ class CustomerControllerTest extends TestCase
     {
         $this->get(route('customers.index'))
             ->assertInertia(function (Assert $page) {
-                $page->component('Customers/Index')
+                $page->component('Items/Index')
                     ->has(
-                        'customers',
+                        'items',
                         2,
-                        fn(Assert $customer) => $customer->has('orderCount')
-                            ->has('name')
-                            ->has('initials')
-                            ->has('id')
-                            ->has('lastname')
-                    );
+                        fn(Assert $customer) => $customer->has('link')
+                            ->has('ID')
+                            ->has(__('Initials'))
+                            ->has(__("Lastname"))
+                            ->has(__("Orders"))
+                    )
+                    ->has('title')
+                    ->has('page');
             });
     }
 
@@ -51,9 +53,11 @@ class CustomerControllerTest extends TestCase
         $this->get(
             route('customers.show', ['customer' => $this->customers->first()->id])
         )->assertInertia(function (Assert $page) {
-            $page->component('Customers/Show')
-                ->has('customer')
-                ->has('orders', 2);
+            $page->component('Items/Show')
+                ->has('item')
+                ->has('orders', 2)
+                ->has('title')
+                ->has('page');
         });
     }
 }

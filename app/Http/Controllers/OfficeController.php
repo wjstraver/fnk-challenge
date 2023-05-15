@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OfficeIndexResource;
 use App\Http\Resources\OfficeResource;
 use App\Http\Resources\OrderResource;
 use App\Models\Office;
@@ -11,22 +12,26 @@ class OfficeController extends Controller
 {
     public function index(): Response
     {
-        return inertia('Offices/Index', [
-            'offices' => fn() => OfficeResource::collection(
+        return inertia('Items/Index', [
+            'items' => fn() => OfficeIndexResource::collection(
                 Office::query()
                     ->withCount('orders')
                     ->get()
-            )
+            ),
+            'title' => fn() => __('Offices'),
+            'page' => fn () => 'offices'
         ]);
     }
 
     public function show(Office $office): Response
     {
-        return inertia('Offices/Show', [
-            'office' => fn() => OfficeResource::make($office),
+        return inertia('Items/Show', [
+            'item' => fn() => OfficeResource::make($office),
             'orders' => fn() => OrderResource::collection(
                 $office->orders()->with('customer', 'employee')->get()
-            )
+            ),
+            'title' => fn() => __('Office: ') . $office->name,
+            'page' => fn () => 'offices'
         ]);
     }
 }

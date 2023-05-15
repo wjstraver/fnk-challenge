@@ -30,13 +30,13 @@ class OrderResourceTest extends TestCase
     {
         $result = $this->resource->toArray(request());
 
-        $this->assertEquals($this->order->id, $result['id']);
-        $this->assertEquals($this->order->product, $result['product']);
-        $this->assertInstanceOf(Carbon::class, $result['createdAt']);
-        $this->assertEquals((string)$this->order->created_at, (string)$result['createdAt']);
-        $this->assertInstanceOf(MissingValue::class, $result['office']);
-        $this->assertInstanceOf(MissingValue::class, $result['customer']);
-        $this->assertInstanceOf(MissingValue::class, $result['employee']);
+        $this->assertEquals($this->order->id, $result['ID']);
+        $this->assertEquals(route('orders.show', ['order' => $this->order->id]), $result['link']);
+        $this->assertArrayHasKey(__('Product'), $result);
+        $this->assertArrayHasKey(__('Created At'), $result);
+        $this->assertInstanceOf(MissingValue::class, $result[__('Customer')]);
+        $this->assertInstanceOf(MissingValue::class, $result[__('Employee')]);
+        $this->assertInstanceOf(MissingValue::class, $result[__('Office')]);
     }
 
     /** @test */
@@ -46,9 +46,7 @@ class OrderResourceTest extends TestCase
 
         $result = $this->resource->toArray(request());
 
-        $this->assertInstanceOf(CustomerResource::class, $result['customer']);
-
-        $this->assertEquals($this->order->customer_id, $result['customer']->id);
+        $this->assertEquals($this->order->customer->name, $result[__("Customer")]);
     }
 
     /** @test */
@@ -58,9 +56,7 @@ class OrderResourceTest extends TestCase
 
         $result = $this->resource->toArray(request());
 
-        $this->assertInstanceOf(OfficeResource::class, $result['office']);
-
-        $this->assertEquals($this->order->office_id, $result['office']->id);
+        $this->assertEquals($this->order->office->name, $result[__('Office')]);
     }
 
     /** @test */
@@ -70,8 +66,6 @@ class OrderResourceTest extends TestCase
 
         $result = $this->resource->toArray(request());
 
-        $this->assertInstanceOf(EmployeeResource::class, $result['employee']);
-
-        $this->assertEquals($this->order->employee_id, $result['employee']->id);
+        $this->assertEquals($this->order->employee->name, $result[__('Employee')]);
     }
 }

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import Header from '@/Components/Page/Header';
+import React from 'react';
+import PageWrapper from '@/Components/PageWrapper';
 
 const Index: React.FC = () => {
 	return (
-		<>
-			<Header />
-			<p>something else</p>
-		</>
+		<PageWrapper activeHeader="" title="Index">
+			<p>WORK IN PROGRESS</p>
+			<p>Some metrics should come here</p>
+		</PageWrapper>
 	);
 };
 

@@ -71,25 +71,14 @@ In the root of the directory, take the following steps:
 
 For backend you kan run the tests using `sail test` or `php artisan test` respectively.
 
-README IS WORK IN PROGRESS
+### TODO
 
-- [ ] installation with sail
-- [ ] configuration .env (port and other stuff)
-- [ ] running all the stuff
-- [ ] all steps in copy paste terminal commands
-- [ ] how to run tests
-
-TO BUILD
-
-- [ ] data models and migrations
-- [ ] import for data
-- [ ] JsonResources to dump data in frontend
-- [ ] something as frontend page
-- [ ] tests for all the stuff
-
-TO RESEARCH
-
-- [ ] testing frontend code
+- [ ] Implement pagination
+- [ ] Move Sortable to backend to make it work with pagination
+- [ ] Add language files
+- [ ] Create homepage with metrics
+  like [Laravel Nova Metrics](https://nova.laravel.com/docs/4.0/metrics/defining-metrics.html)
+- [ ] Add Policies
 
 ### Future development
 

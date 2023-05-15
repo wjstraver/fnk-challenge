@@ -32,14 +32,17 @@ class EmployeeControllerTest extends TestCase
     {
         $this->get(route('employees.index'))
             ->assertInertia(function (Assert $page) {
-                $page->component('Employees/Index')
+                $page->component('Items/Index')
                     ->has(
-                        'employees',
+                        'items',
                         2,
-                        fn(Assert $employee) => $employee->has('orderCount')
-                            ->has('name')
-                            ->has('id')
-                    );
+                        fn(Assert $employee) => $employee->has('link')
+                            ->has('ID')
+                            ->has(__('Name'))
+                            ->has(__('Sold Orders'))
+                    )
+                    ->has('title')
+                    ->has('page');
             });
     }
 
@@ -49,9 +52,11 @@ class EmployeeControllerTest extends TestCase
         $this->get(
             route('employees.show', ['employee' => $this->employees->first()->id])
         )->assertInertia(function (Assert $page) {
-            $page->component('Employees/Show')
-                ->has('employee')
-                ->has('orders', 2);
+            $page->component('Items/Show')
+                ->has('item')
+                ->has('orders', 2)
+                ->has('title')
+                ->has('page');
         });
     }
 }

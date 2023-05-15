@@ -32,14 +32,17 @@ class OfficeControllerTest extends TestCase
     {
         $this->get(route('offices.index'))
             ->assertInertia(function (Assert $page) {
-                $page->component('Offices/Index')
+                $page->component('Items/Index')
                     ->has(
-                        'offices',
+                        'items',
                         2,
-                        fn(Assert $office) => $office->has('orderCount')
-                            ->has('name')
-                            ->has('id')
-                    );
+                        fn(Assert $office) => $office->has('link')
+                            ->has('ID')
+                            ->has(__('Name'))
+                            ->has(__('Sold Orders'))
+                    )
+                    ->has('title')
+                    ->has('page');
             });
     }
 
@@ -49,9 +52,11 @@ class OfficeControllerTest extends TestCase
         $this->get(
             route('offices.show', ['office' => $this->offices->first()->id])
         )->assertInertia(function (Assert $page) {
-            $page->component('Offices/Show')
-                ->has('office')
-                ->has('orders', 2);
+            $page->component('Items/Show')
+                ->has('item')
+                ->has('orders', 2)
+                ->has('title')
+                ->has('page');
         });
     }
 }
